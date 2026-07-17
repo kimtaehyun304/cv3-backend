@@ -12,6 +12,8 @@ type DataRes = {
   itemCount: number;
 };
 
+type Category = '라방' | '홈쇼핑';
+
 const labangMockData: DataRes[] = [
   {
     rank: 1,
@@ -115,9 +117,124 @@ const labangMockData: DataRes[] = [
   },
 ];
 
+const homeShoppingMockData = [
+  {
+    rank: 1,
+    title: '유피토스 피토프로틴 헤어컬러 기본패키지',
+    category: '화장품/미용',
+    date: new Date('2026-07-16T23:55:00'),
+    viewRating: 5.2,
+    salesCount: 4257,
+    revenue: 166000000,
+    itemCount: 5,
+  },
+  {
+    rank: 2,
+    title: '25FW 헤이즈 퀼팅 다운',
+    category: '패션의류',
+    date: new Date('2026-07-16T22:30:00'),
+    viewRating: 4.8,
+    salesCount: 4057,
+    revenue: 187000000,
+    itemCount: 10,
+  },
+  {
+    rank: 3,
+    title: '바디프랜드 마사지체어',
+    category: '생활/건강',
+    date: new Date('2026-07-16T21:00:00'),
+    viewRating: 4.5,
+    salesCount: 832,
+    revenue: 520000000,
+    itemCount: 3,
+  },
+  {
+    rank: 4,
+    title: 'LG 오브제컬렉션 냉장고',
+    category: '가전',
+    date: new Date('2026-07-16T20:00:00'),
+    viewRating: 4.1,
+    salesCount: 356,
+    revenue: 430000000,
+    itemCount: 2,
+  },
+  {
+    rank: 5,
+    title: '프리미엄 한우 선물세트',
+    category: '식품',
+    date: new Date('2026-07-16T19:00:00'),
+    viewRating: 3.9,
+    salesCount: 2150,
+    revenue: 129000000,
+    itemCount: 6,
+  },
+  {
+    rank: 6,
+    title: '다이슨 에어랩 멀티스타일러',
+    category: '뷰티/가전',
+    date: new Date('2026-07-16T18:00:00'),
+    viewRating: 3.6,
+    salesCount: 1240,
+    revenue: 310000000,
+    itemCount: 4,
+  },
+  {
+    rank: 7,
+    title: '여름 린넨 셔츠 패키지',
+    category: '패션의류',
+    date: new Date('2026-07-16T17:00:00'),
+    viewRating: 3.2,
+    salesCount: 2980,
+    revenue: 89000000,
+    itemCount: 8,
+  },
+  {
+    rank: 8,
+    title: '정관장 홍삼 건강세트',
+    category: '건강식품',
+    date: new Date('2026-07-16T16:00:00'),
+    viewRating: 2.8,
+    salesCount: 1780,
+    revenue: 76000000,
+    itemCount: 5,
+  },
+  {
+    rank: 9,
+    title: '삼성 비스포크 식기세척기',
+    category: '가전',
+    date: new Date('2026-07-16T15:00:00'),
+    viewRating: 2.5,
+    salesCount: 420,
+    revenue: 210000000,
+    itemCount: 2,
+  },
+  {
+    rank: 10,
+    title: '아웃도어 캠핑 패키지',
+    category: '스포츠/레저',
+    date: new Date('2026-07-16T14:00:00'),
+    viewRating: 2.1,
+    salesCount: 950,
+    revenue: 67000000,
+    itemCount: 7,
+  },
+];
+
 const ProductController = {
   getAll(req: Request, res: Response) {
-    res.json(labangMockData);
+    let { category } = req.query;
+
+    if (!category) category = '라방';
+
+    if (category !== '라방' && category !== '홈쇼핑') {
+      return res
+        .status(409)
+        .json({ message: '라방, 홈쇼핑 카테고리만 가능합니다' });
+    }
+
+    if (category == '라방') res.json(labangMockData);
+
+    if (category == '홈쇼핑') res.json(homeShoppingMockData);
   },
 };
 
