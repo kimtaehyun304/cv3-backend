@@ -3,6 +3,7 @@ import { Router } from 'express';
 import Paths from '@src/common/constants/Paths';
 
 import UserRoutes from './UserRoutes';
+import ProductContoller from '@src/controllers/productController';
 
 /******************************************************************************
                                 Setup
@@ -20,6 +21,13 @@ userRouter.put(Paths.Users.Update, UserRoutes.update);
 userRouter.delete(Paths.Users.Delete, UserRoutes.delete);
 
 apiRouter.use(Paths.Users._, userRouter);
+
+// ----------------------- Add ProductRouter --------------------------------- //
+
+const productRouter = Router();
+
+productRouter.get(Paths.Products.Get, ProductContoller.getAll);
+apiRouter.use(Paths.Products._, productRouter);
 
 /******************************************************************************
                                 Export
