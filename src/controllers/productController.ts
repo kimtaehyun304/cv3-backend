@@ -1,7 +1,11 @@
 import { Request, Response } from 'express';
 
-import { crawlData } from '@src/services/crawlService';
+import {
+  crawlHomeShoppingData,
+  crawlLabangData,
+} from '@src/services/crawlService';
 
+/*
 type DataRes = {
   rank: number;
   title: string;
@@ -14,7 +18,7 @@ type DataRes = {
   itemCount: number;
 };
 
-/*
+
 const labangMockData: DataRes[] = [
   {
     rank: 1,
@@ -235,12 +239,12 @@ const ProductController = {
     }
 
     if (category === '라방') {
-      const data = await crawlData('라방');
+      const data = await crawlLabangData();
       return res.json(data);
     }
 
     if (category === '홈쇼핑') {
-      const data = await crawlData('홈쇼핑');
+      const data = await crawlHomeShoppingData();
       return res.json(data);
     }
   },

@@ -1,9 +1,5 @@
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 import { chromium } from 'playwright';
-import { BroadcastChannel } from 'worker_threads';
 
-import { BroadcastCategory } from '@src/common/types/productType';
 
 //카테고리 데이터가 react 렌더링 이후 채워지는거라 cheerio 방식의 크롤리을론 불가
 /*
@@ -41,7 +37,7 @@ export async function crawlData() {
 }
 */
 
-export async function crawlData(category: BroadcastCategory) {
+export async function crawlLabangData() {
   const url = 'https://live.ecomm-data.com/assignment';
 
   const browser = await chromium.launch({
@@ -49,19 +45,10 @@ export async function crawlData(category: BroadcastCategory) {
   });
 
   const page = await browser.newPage();
-  
+
   await page.goto(url, {
     waitUntil: 'networkidle',
   });
-
-  if (category === '라방') {
-    await page.locator('button.tab', { hasText: '라방' }).click();
-  } else {
-    await page.locator('button.tab', { hasText: '홈쇼핑' }).click();
-  }
-
-  // 테이블 렌더링 기다리기
-  await page.waitForSelector('table tbody tr');
 
   const result = await page.evaluate(() => {
     const rows = document.querySelectorAll(
@@ -87,6 +74,79 @@ export async function crawlData(category: BroadcastCategory) {
         time: tds[3]?.querySelectorAll('span')[1]?.textContent?.trim(),
 
         viewCount: tds[4]?.textContent?.trim(),
+
+        salesCount: tds[5]?.textContent?.trim(),
+
+        salesAmount: tds[6]?.textContent?.trim(),
+
+        itemCount: tds[7]?.textContent?.trim(),
+
+        href: tds[1]?.querySelector('a')?.getAttribute('href'),
+      };
+    });
+  });
+
+  await browser.close();
+
+  console.log(result);
+
+  return result;
+}
+
+export async function crawlHomeShoppingData() {
+  const url = 'https://live.ecomm-data.com/assignment';
+
+  const browser = await chromium.launch({
+    headless: true,
+  });
+
+  const page = await browser.newPage();
+
+  await page.goto(url, {
+    waitUntil: 'networkidle',
+  });
+
+  // 홈쇼핑 탭 버튼 클릭
+  await page.getByRole('button', { name: '홈쇼핑' }).click();
+
+  /*
+  // 홈쇼핑 테이블이 렌더링될 때까지 대기 (이걸로 안됨)
+  await page
+    .locator('table.Table-module__fdc4Pa__table tbody tr')
+    .first()
+    .waitFor();
+  */
+
+  // 홈쇼핑 테이블로 변경될 때 까지 대기
+  await page.locator('.TableHsshow-module__aVdvXq__adWrap').first().waitFor();
+
+  const result = await page.evaluate(() => {
+    const rows = document.querySelectorAll(
+      'table.Table-module__fdc4Pa__table tbody tr',
+    );
+
+    return Array.from(rows).map((row) => {
+      const tds = row.querySelectorAll('td');
+
+      return {
+        rank: tds[0]?.textContent?.trim(),
+
+        title: tds[1]?.querySelector('a > span')?.textContent?.trim(),
+
+        platform: tds[1]
+          ?.querySelector('.TableHsshow-module__aVdvXq__adWrap')
+          ?.childNodes[0]?.textContent?.trim(),
+
+        category: tds[2]?.querySelector('a')?.textContent?.trim(),
+
+        date: tds[3]?.querySelectorAll('span')[0]?.textContent?.trim(),
+
+        time: tds[3]?.querySelectorAll('span')[1]?.textContent?.trim(),
+
+        // preparing이면 textContent가 ""이므로 alt를 사용
+        viewRating:
+          tds[4]?.querySelector('img')?.getAttribute('alt') ??
+          tds[4]?.textContent?.trim(),
 
         salesCount: tds[5]?.textContent?.trim(),
 
