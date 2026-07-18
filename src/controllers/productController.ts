@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import { crawlData } from '@src/services/crawlService';
+
 type DataRes = {
   rank: number;
   title: string;
@@ -12,8 +14,7 @@ type DataRes = {
   itemCount: number;
 };
 
-type Category = '라방' | '홈쇼핑';
-
+/*
 const labangMockData: DataRes[] = [
   {
     rank: 1,
@@ -219,9 +220,10 @@ const homeShoppingMockData = [
     itemCount: 7,
   },
 ];
+*/
 
 const ProductController = {
-  getAll(req: Request, res: Response) {
+  async getAll(req: Request, res: Response) {
     let { category } = req.query;
 
     if (!category) category = '라방';
@@ -232,9 +234,15 @@ const ProductController = {
         .json({ message: '라방, 홈쇼핑 카테고리만 가능합니다' });
     }
 
-    if (category == '라방') res.json(labangMockData);
+    if (category === '라방') {
+      const data = await crawlData('라방');
+      return res.json(data);
+    }
 
-    if (category == '홈쇼핑') res.json(homeShoppingMockData);
+    if (category === '홈쇼핑') {
+      const data = await crawlData('홈쇼핑');
+      return res.json(data);
+    }
   },
 };
 
