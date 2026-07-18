@@ -69,6 +69,8 @@ export async function crawlLabangData() {
 
         category: tds[2]?.querySelector('a')?.textContent?.trim() ?? '-',
 
+        categoryHref: tds[2]?.querySelector('a')?.getAttribute('href') ?? '-',
+
         date: tds[3]?.querySelectorAll('span')[0]?.textContent?.trim() ?? '-',
 
         time: tds[3]?.querySelectorAll('span')[1]?.textContent?.trim() ?? '-',
@@ -140,6 +142,8 @@ export async function crawlHomeShoppingData() {
             ?.childNodes[0]?.textContent?.trim() ?? '-',
 
         category: tds[2]?.querySelector('a')?.textContent?.trim() ?? '-',
+
+        categoryHref: tds[2]?.querySelector('a')?.getAttribute('href') ?? '-',
 
         date: tds[3]?.querySelectorAll('span')[0]?.textContent?.trim() ?? '-',
 
