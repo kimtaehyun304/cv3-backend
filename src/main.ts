@@ -1,6 +1,7 @@
 import logger from 'jet-logger';
 
 import EnvVars from './common/constants/env';
+import { startScheduler } from './scheduler';
 import server from './server';
 
 /******************************************************************************
@@ -13,9 +14,13 @@ const SERVER_START_MESSAGE =
 /******************************************************************************
                                   Run
 ******************************************************************************/
+async function bootstrap() {
+  await startScheduler();
+}
 
 // Start the server
 server.listen(EnvVars.Port, (err) => {
+  bootstrap();
   if (!!err) {
     logger.err(err.message);
   } else {

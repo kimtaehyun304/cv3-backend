@@ -1,6 +1,5 @@
 import { chromium } from 'playwright';
 
-
 //카테고리 데이터가 react 렌더링 이후 채워지는거라 cheerio 방식의 크롤리을론 불가
 /*
 export async function crawlData() {
@@ -59,34 +58,35 @@ export async function crawlLabangData() {
       const tds = row.querySelectorAll('td');
 
       return {
-        rank: tds[0]?.textContent?.trim(),
+        rank: tds[0]?.textContent?.trim() ?? '-',
 
-        title: tds[1]?.querySelector('.title')?.textContent?.trim(),
+        title: tds[1]?.querySelector('.title')?.textContent?.trim() ?? '-',
 
-        platform: tds[1]
-          ?.querySelector('.TableLabang-module__uW-g-G__adWrap')
-          ?.childNodes[0]?.textContent?.trim(),
+        platform:
+          tds[1]
+            ?.querySelector('.TableLabang-module__uW-g-G__adWrap')
+            ?.childNodes[0]?.textContent?.trim() ?? '-',
 
-        category: tds[2]?.querySelector('a')?.textContent?.trim(),
+        category: tds[2]?.querySelector('a')?.textContent?.trim() ?? '-',
 
-        date: tds[3]?.querySelectorAll('span')[0]?.textContent?.trim(),
+        date: tds[3]?.querySelectorAll('span')[0]?.textContent?.trim() ?? '-',
 
-        time: tds[3]?.querySelectorAll('span')[1]?.textContent?.trim(),
+        time: tds[3]?.querySelectorAll('span')[1]?.textContent?.trim() ?? '-',
 
-        viewCount: tds[4]?.textContent?.trim(),
+        viewCount: tds[4]?.textContent?.trim() ?? '-',
 
-        salesCount: tds[5]?.textContent?.trim(),
+        salesCount: tds[5]?.textContent?.trim() ?? '-',
 
-        salesAmount: tds[6]?.textContent?.trim(),
+        salesAmount: tds[6]?.textContent?.trim() ?? '-',
 
-        itemCount: tds[7]?.textContent?.trim(),
+        itemCount: tds[7]?.textContent?.trim() ?? '-',
 
-        href: tds[1]?.querySelector('a')?.getAttribute('href'),
+        href: tds[1]?.querySelector('a')?.getAttribute('href') ?? '-',
       };
     });
   });
 
-  await browser.close();
+  //await browser.close();
 
   console.log(result);
 
@@ -103,7 +103,8 @@ export async function crawlHomeShoppingData() {
   const page = await browser.newPage();
 
   await page.goto(url, {
-    waitUntil: 'networkidle',
+    //networkidle보다 빠른 느낌
+    waitUntil: 'domcontentloaded',
   });
 
   // 홈쇼핑 탭 버튼 클릭
@@ -129,32 +130,34 @@ export async function crawlHomeShoppingData() {
       const tds = row.querySelectorAll('td');
 
       return {
-        rank: tds[0]?.textContent?.trim(),
+        rank: tds[0]?.textContent?.trim() ?? '-',
 
-        title: tds[1]?.querySelector('a > span')?.textContent?.trim(),
+        title: tds[1]?.querySelector('a > span')?.textContent?.trim() ?? '-',
 
-        platform: tds[1]
-          ?.querySelector('.TableHsshow-module__aVdvXq__adWrap')
-          ?.childNodes[0]?.textContent?.trim(),
+        platform:
+          tds[1]
+            ?.querySelector('.TableHsshow-module__aVdvXq__adWrap')
+            ?.childNodes[0]?.textContent?.trim() ?? '-',
 
-        category: tds[2]?.querySelector('a')?.textContent?.trim(),
+        category: tds[2]?.querySelector('a')?.textContent?.trim() ?? '-',
 
-        date: tds[3]?.querySelectorAll('span')[0]?.textContent?.trim(),
+        date: tds[3]?.querySelectorAll('span')[0]?.textContent?.trim() ?? '-',
 
-        time: tds[3]?.querySelectorAll('span')[1]?.textContent?.trim(),
+        time: tds[3]?.querySelectorAll('span')[1]?.textContent?.trim() ?? '-',
 
         // preparing이면 textContent가 ""이므로 alt를 사용
         viewRating:
           tds[4]?.querySelector('img')?.getAttribute('alt') ??
-          tds[4]?.textContent?.trim(),
+          tds[4]?.textContent?.trim() ??
+          '-',
 
-        salesCount: tds[5]?.textContent?.trim(),
+        salesCount: tds[5]?.textContent?.trim() ?? '-',
 
-        salesAmount: tds[6]?.textContent?.trim(),
+        salesAmount: tds[6]?.textContent?.trim() ?? '-',
 
-        itemCount: tds[7]?.textContent?.trim(),
+        itemCount: tds[7]?.textContent?.trim() ?? '-',
 
-        href: tds[1]?.querySelector('a')?.getAttribute('href'),
+        href: tds[1]?.querySelector('a')?.getAttribute('href') ?? '-',
       };
     });
   });

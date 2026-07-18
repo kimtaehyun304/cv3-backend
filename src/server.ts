@@ -1,9 +1,9 @@
+import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import logger from 'jet-logger';
 import morgan from 'morgan';
 import path from 'path';
-import cors from 'cors';
 
 import Paths from '@src/common/constants/Paths';
 import { RouteError } from '@src/common/utils/route-errors';
@@ -23,7 +23,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.json())
 
 // Show routes called in console during development
 if (EnvVars.NodeEnv === NodeEnvs.DEV) {
