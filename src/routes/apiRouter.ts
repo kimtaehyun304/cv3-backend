@@ -3,7 +3,8 @@ import { Router } from 'express';
 import Paths from '@src/common/constants/Paths';
 
 import UserRoutes from './UserRoutes';
-import ProductContoller from '@src/controllers/productController';
+import BroadcastController from '@src/controllers/broadCastController';
+
 
 /******************************************************************************
                                 Setup
@@ -24,10 +25,10 @@ apiRouter.use(Paths.Users._, userRouter);
 
 // ----------------------- Add ProductRouter --------------------------------- //
 
-const productRouter = Router();
+const broadcastRouter = Router();
 
-productRouter.get(Paths.Products.Get, ProductContoller.getAll);
-apiRouter.use(Paths.Products._, productRouter);
+broadcastRouter.get(Paths.Broadcasts.Get, BroadcastController.getAll);
+apiRouter.use(Paths.Broadcasts._, broadcastRouter);
 
 /******************************************************************************
                                 Export

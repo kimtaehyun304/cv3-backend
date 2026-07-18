@@ -226,7 +226,7 @@ const homeShoppingMockData = [
 ];
 */
 
-const ProductController = {
+const BroadcastController = {
   async getAll(req: Request, res: Response) {
     let { category } = req.query;
 
@@ -250,4 +250,4 @@ const ProductController = {
   },
 };
 
-export default ProductController;
+export default BroadcastController;

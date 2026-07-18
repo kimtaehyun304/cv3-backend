@@ -9,8 +9,8 @@ const Paths = {
     Update: '/update',
     Delete: '/delete/:id',
   },
-  Products: {
-    _: '/products',
+  Broadcasts: {
+    _: '/broadcasts',
     Get: '/',
     Add: '/add',
     Update: '/update',
