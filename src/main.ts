@@ -20,7 +20,10 @@ async function bootstrap() {
 
 // Start the server
 server.listen(EnvVars.Port, (err) => {
-  bootstrap();
+  bootstrap().catch((error: Error) => {
+    logger.err(error.message);
+  });
+
   if (!!err) {
     logger.err(err.message);
   } else {

@@ -228,7 +228,7 @@ const homeShoppingMockData = [
 */
 
 const BroadcastController = {
-  async getAll(req: Request, res: Response) {
+  getAll(this: void, req: Request, res: Response) {
     let { category } = req.query;
 
     if (!category) category = '라방';

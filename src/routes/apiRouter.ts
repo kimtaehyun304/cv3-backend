@@ -3,7 +3,7 @@ import { Router } from 'express';
 import Paths from '@src/common/constants/Paths';
 
 import UserRoutes from './UserRoutes';
-import BroadcastController from '@src/controllers/broadCastController';
+import BroadcastController from '@src/controllers/broadcastController';
 
 
 /******************************************************************************

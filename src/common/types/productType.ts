@@ -1,4 +1,3 @@
-import { S } from 'node_modules/vitest/dist/chunks/config.d.A1h_Y6Jt';
 
 export type Broadcast = {
   rank: string;
