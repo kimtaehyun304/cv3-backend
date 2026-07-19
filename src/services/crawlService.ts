@@ -1,4 +1,4 @@
-import { chromium } from 'playwright';
+import { chromium } from 'playwright-chromium';
 
 //카테고리 데이터가 react 렌더링 이후 채워지는거라 cheerio 방식의 크롤리을론 불가
 /*
