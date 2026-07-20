@@ -3,7 +3,7 @@ import { crawlHomeShoppingData, crawlLabangData } from "@src/services/crawlServi
 
 describe("Crawler", () => {
     it("크롤링 테스트", async () => {
-        //await crawlLabangData();
-        await crawlHomeShoppingData();
+        await crawlLabangData();
+        //await crawlHomeShoppingData();
     })
 })

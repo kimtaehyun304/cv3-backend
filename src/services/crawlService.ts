@@ -38,6 +38,8 @@ export async function crawlLabangData() {
       timeout: 60000,
     });
 
+    await page.locator('.TableLabang-module__uW-g-G__category').first().waitFor();
+
     const result = await page.evaluate(() => {
       const rows = document.querySelectorAll(
         'table.Table-module__fdc4Pa__table tbody tr',
@@ -76,7 +78,7 @@ export async function crawlLabangData() {
         };
       });
     });
-    //console.log(result);
+    console.log(result);
 
     return result;
   } catch (error) {
@@ -115,7 +117,7 @@ export async function crawlHomeShoppingData() {
   */
 
     // 홈쇼핑 테이블로 변경될 때 까지 대기
-    await page.locator('.TableHsshow-module__aVdvXq__adWrap').first().waitFor();
+    await page.locator('.TableHsshow-module__aVdvXq__category').first().waitFor();
 
     const result = await page.evaluate(() => {
       const rows = document.querySelectorAll(
@@ -160,7 +162,7 @@ export async function crawlHomeShoppingData() {
       });
     });
 
-    //console.log(result);
+    console.log(result);
 
     return result;
   } catch (error) {
