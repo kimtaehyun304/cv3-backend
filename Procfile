@@ -1,1 +1,1 @@
-web: node main.js
+web: NODE_ENV=production PORT=8080 node main.js
