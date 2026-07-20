@@ -89,7 +89,8 @@ export async function crawlLabangData() {
     });
   });
 
-  //await browser.close();
+  //주석 처리하면 메모리 많이 먹음
+  await browser.close();
 
   console.log(result);
 
