@@ -1,4 +1,3 @@
-
 export type Broadcast = {
   rank: string;
   title: string;
@@ -15,7 +14,6 @@ export type Broadcast = {
   categoryHref: string;
 };
 
-/*
 export type Proudct = {
   rank: number;
   title: string;
@@ -27,6 +25,17 @@ export type Proudct = {
   revenue: number | null;
   itemCount: number;
 };
-*/
+
+export type DataRes = {
+  rank: number;
+  title: string;
+  category: string;
+  date: Date;
+  viewCount?: number | null;
+  viewRating?: number | null;
+  salesCount: number | null;
+  revenue: number | null;
+  itemCount: number;
+};
 
 export type BroadcastCategory = '라방' | '홈쇼핑';
