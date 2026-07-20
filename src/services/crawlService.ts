@@ -46,7 +46,8 @@ export async function crawlLabangData() {
   const page = await browser.newPage();
 
   await page.goto(url, {
-    waitUntil: 'networkidle',
+    waitUntil: 'domcontentloaded',
+    timeout: 60000,
   });
 
   const result = await page.evaluate(() => {
@@ -107,6 +108,7 @@ export async function crawlHomeShoppingData() {
   await page.goto(url, {
     //networkidle보다 빠른 느낌
     waitUntil: 'domcontentloaded',
+    timeout: 60000,
   });
 
   // 홈쇼핑 탭 버튼 클릭
