@@ -1,39 +1,26 @@
 ## About
-
 This project was created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
 
-## Available Scripts
+# cv3 기술 과제
 
-### `npm run clean-install`
+* [프론트] react 19, typeScript 6, tailwind 4, vite
+* [백엔드] express 5, typeScript 6, playwright-chromium, node-cron
+* [노드 버전] v22.23.1
 
-Remove the existing `node_modules/` folder, `package-lock.json`, and reinstall all library modules.
+### 서비스 링크
+* https://kth-cv3.netlify.app/  
+* http://15.165.194.220/api/broadcasts?category=라방
 
-### `npm run dev` 
+### 깃허브 링크
+* https://github.com/kimtaehyun304/cv3-assignment
+* https://github.com/kimtaehyun304/cv3-backend
 
-Run the server in development with hot reloading and browser refresh (see `package.json` for all `npm run dev` variations)<br/>
+### 실행 방법
+1. download ZIP 이후 압축해재
+2. VSCODE에서 압축해재한 폴더로 이동
+3. VSCODE 터미널에서 아래 명령어 입력
+4. npm install
+5. npm run dev
 
-**IMPORTANT** development mode uses `swc` for performance reasons which DOES NOT check for typescript errors. Run `npm run type-check` to check for type errors. NOTE: you should use your IDE to prevent most type errors.
-
-### `npm test`
-
-Run unit-tests with <a href="https://vitest.dev/guide/">vitest</a>.
-
-### `npm run lint`
-
-Check for linting errors.
-
-### `npm run build`
-
-Build the project for production.
-
-### `npm start`
-
-Run the production build (Must be built first).
-
-### `npm run type-check`
-
-Check for typescript errors.
-
-## Additional Notes
-
-- If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`.
+프론트, 백엔드 실행 방식 동일합니다.  
+직접 실행해도 동작하지만, 심사 편의를 위해 배포했습니다.
