@@ -25,6 +25,7 @@ jobs:
           cp -r dist/. deploy
           cp -r node_modules deploy
           cp package*.json deploy
+          cp Procfile deploy
           cd deploy && zip -r app.zip .
 
       - name: Get current time
