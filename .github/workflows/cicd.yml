@@ -22,7 +22,7 @@ jobs:
       - name: Copy files to deploy folder
         run: |
           mkdir -p deploy
-          cp -r dist deploy
+          cp -r dist/. deploy
           cp -r node_modules deploy
           cp package*.json deploy
           cd deploy && zip -r app.zip .
