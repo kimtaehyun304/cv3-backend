@@ -23,7 +23,7 @@ jobs:
         run: |
           mkdir -p deploy
           cp -r dist deploy
-          cd package*.json deploy
+          cp package*.json deploy
           cd deploy && zip -r app.zip .
 
       - name: Get current time
