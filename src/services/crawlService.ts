@@ -38,12 +38,11 @@ export async function crawlLabangData() {
       timeout: 60000,
     });
 
-    await page.locator('.TableLabang-module__uW-g-G__category').first().waitFor();
+    //await page.locator('.TableLabang-module__uW-g-G__category').first().waitFor();
+    await page.locator('[class$="__category"]').first().waitFor();
 
     const result = await page.evaluate(() => {
-      const rows = document.querySelectorAll(
-        'table.Table-module__fdc4Pa__table tbody tr',
-      );
+      const rows = document.querySelectorAll('table tbody tr');
 
       return Array.from(rows).map((row) => {
         const tds = row.querySelectorAll('td');
@@ -55,7 +54,7 @@ export async function crawlLabangData() {
 
           platform:
             tds[1]
-              ?.querySelector('.TableLabang-module__uW-g-G__adWrap')
+              ?.querySelector('[class$="__adWrap"]')
               ?.childNodes[0]?.textContent?.trim() ?? '-',
 
           category: tds[2]?.querySelector('a')?.textContent?.trim() ?? '-',
@@ -116,13 +115,13 @@ export async function crawlHomeShoppingData() {
     .waitFor();
   */
 
-    // 홈쇼핑 테이블로 변경될 때 까지 대기
-    await page.locator('.TableHsshow-module__aVdvXq__category').first().waitFor();
+    await page
+      .locator('[class*="TableHsshow-module__"][class*="__category"]')
+      .first()
+      .waitFor();
 
     const result = await page.evaluate(() => {
-      const rows = document.querySelectorAll(
-        'table.Table-module__fdc4Pa__table tbody tr',
-      );
+      const rows = document.querySelectorAll('table tbody tr');
 
       return Array.from(rows).map((row) => {
         const tds = row.querySelectorAll('td');
@@ -134,7 +133,7 @@ export async function crawlHomeShoppingData() {
 
           platform:
             tds[1]
-              ?.querySelector('.TableHsshow-module__aVdvXq__adWrap')
+              ?.querySelector('[class$="__adWrap"]')
               ?.childNodes[0]?.textContent?.trim() ?? '-',
 
           category: tds[2]?.querySelector('a')?.textContent?.trim() ?? '-',
